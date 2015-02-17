@@ -9,7 +9,7 @@
 #import "TitleSelectorViewController.h"
 #import "TitleTableViewDataSource.h"
 
-@interface TitleSelectorViewController ()
+@interface TitleSelectorViewController () <UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) TitleTableViewDataSource *dataSource;
@@ -25,8 +25,14 @@
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.dataSource = self.dataSource;
+    self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    self.title = [self.dataSource titleAtIndexPath:indexPath];
 }
 
 @end
